@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Flight Tracker V1</title>
+        <link src="./styles/style.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    </head>
+    <body>
+        <div class="main-container">
+            <header class="hearder">
+                <div class="left-nav">
+                    <img src="../src/images/flight-logo.png"/>
+                    <h2 id="#web-name-id">Roseline Flight Tracker</h2>
+                </div>
+                <div class="middle-nav">
+                    <a href="../dist/index.html"><i class="material-icons" style="font-size:25px">home</i> Home</a>
+                    <a href="../src/pages/about.html"><i class="material-icons" style="font-size:25px">info</i>About</a>
+                    <a href="../src/pages/contact-us.html"><i class="material-icons" style="font-size:25px">contact_phone</i>Contact Us</a>
+                    <a href="../src/pages/services.html"><i class="material-icons" style="font-size:25px">pan_tool</i>services</a>
+                </div>
+            </header>
+            <div class="sidebar-content">
+                <div class="sidebar">
+                    <div class="http-requests">
+                        <h1>On going flights</h1><br/>
+                        <button id='buttonListStates'>Get All states</button><br/>
+                        <!-- <button id="ButtongetAllStatesByMinLongMaxLat">Get All states Lat and Lon</button><br/>
+                        <button id="ButtongetAllStatesForTwoPlanes">Get All States of 2 planes</button><br/>
+                        <button id="buttonGetFlightsByInterval">Get Flights By Interval</button><br/>
+                        <button id="buttonGetByArrival">Get flights by arrival</button><br/>
+                        <button id="buttonGetByDepature">Get Flights by depature</button><br/> -->
+                        <button id="buttonFlightLifeTrack">Get Flight Life Track</button><br/>
+                    </div>
+                    <div class="social-links">
+                        <p><a class="facebook-icon" href="https://www.facebook.com/"><img src="../src/images/facebookIcon.jpg" style="width:30px;height:30px;"></a></p>
+                        <p><a href="https://za.pinterest.com/"><img src="../src/images/pinrest_icon.png" style="width:30px;height:30px;"></a></p>
+                        <p><a href="https://www.instagram.com/"><img src="../src/images/instagram_icon.jpg" style="width:30px;height:30px;"></a></p>
+                    </div>
+                </div> 
+            </div>
+            <main class="content">
+                <table id="flightsTable">
+                    <tr>
+                        <th>ICAO24</th>
+                        <th>Callsign</th>
+                        <th>Origin Country</th>
+                    </tr>
+                </table>
+                <div class="pagination">
+                    <button id="prevPageBtn" disabled>&lt; Prev</button>
+                    <span id="currentPage"></span>
+                    <button id="nextPageBtn">Next &gt;</button>
+                </div>
+                <div id="flightDetails"></div>
+            </main> 
+            <div id="map">
+            </div> 
+            <footer class="footer">
+                footer here
+            </footer>
+        </div>
+    </body>
+</html>
