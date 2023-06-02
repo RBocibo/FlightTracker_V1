@@ -154,8 +154,7 @@ tr:hover {
   .sidebar > .http-requests {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    justify-content: center;
+    justify-content: start;
   }
   .sidebar > .social-links {
     height: 50px;

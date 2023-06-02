@@ -144,7 +144,7 @@ function getFlightsPerPage() {
 }
 
 function showNoFlightPopup() {
-  alert("The flight doesn't have tracks");
+  alert("No states for flights");
 }
 
 function showNoFlightToTrackPopup() {
