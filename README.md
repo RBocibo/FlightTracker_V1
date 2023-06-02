@@ -22,18 +22,18 @@ cd FlightTracker_V1
   
 # 7. You will lend on the following screen for mobile and desktop
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/e9ae741a-6b8d-4027-befd-825f4cedb3c4)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/da5df6c5-196b-4251-b18e-b2afc1ffb234)
 
 
 :sparkles: Mobile Version for FlightTracker :earth_africa: :round_pushpin:
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/d04abf9e-8de7-4eef-a266-2bd3a2d82028)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/90019ebb-dfc7-478c-b4ae-1a2b9f6f0ea0)
 
 :radio_button: Mobile versions show only four flights states on the page and use pagination to get more
 
 
 :sparkles: Desktop version of screens higher than mobile :earth_africa: :round_pushpin:
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/9625fe20-9393-4fd8-9fae-3fe44de37825)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/7b2fa02e-f7d9-43f5-8906-5e450f36cd06)
 
 :radio_button: Desktop version how about 20 states on the page and use pagination to get more.
