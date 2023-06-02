@@ -27,7 +27,7 @@ cd FlightTracker_V1
 
 :sparkles: Mobile Version for FlightTracker :earth_africa: :round_pushpin:
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/90019ebb-dfc7-478c-b4ae-1a2b9f6f0ea0)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/cbfcc9cb-6c92-4176-9ccb-66f681a8c356)
 
 :radio_button: Mobile versions show only four flights states on the page and use pagination to get more
 
