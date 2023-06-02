@@ -1,6 +1,26 @@
 # FlightTracker_V1 
 
-Landing page: Shows the tracking point of Equator :round_pushpin: and the locations will change as you select the flight you want to track. When there is no :airplane: flight a popup will show to let you know that there is nothing to track for a selected flight.
+⚡ **HOW TO RUN THE PROJECT ? **👷
+# 1.  Clone the project using the folowing link
+
+https://github.com/RBocibo/FlightTracker_V1.git
+ 
+# 3. Navigate to the project directory.
+
+cd FlightTracker_V1 
+
+# 4.  Install packages required
+  run the command *npm install* on your terminal 
+
+# 5. Project Build
+
+  npm run build
+  
+# 6.  Naviagte to the following folder and open index.html
+ 
+ cd FlightTracker_V1/dist/index.html
+  
+# 7. You will lend on the following screen for mobile and desktop
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/e9ae741a-6b8d-4027-befd-825f4cedb3c4)
 
