@@ -1,87 +1,79 @@
-let marker;
-
-function showMarker(latitude, longitude) {
-    const mapContainer = document.querySelector("#map");
-
-    const map = L.map(mapContainer, {
-        center: [latitude, longitude ],
-        zoom: 10
-    });
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png?', 
-    {attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'})
-    .addTo(map);
-
-      if (marker) {
-      map.removeLayer(marker);
-    }  
-  
-    marker = L.marker([latitude, longitude]);
-    console.log("marker created", marker);
-
-    marker.addTo(map);
-} 
+import { map, polyline } from "leaflet";
+import { showMarker } from "./map";
 
 function getAllStates() {
-    const itemsPerPage = 20;
-    const flights = [];
-    let currentPage = 1;
+  const itemsPerPage = getFlightsPerPage();
+  const flights = [];
+  let currentPage = 1;
 
-    fetch('https://opensky-network.org/api/states/all')
-        .then(response => response.json())
-        .then(data => {
-            flights.push(...data.states);
-            displayFlights(currentPage);
-        });
+  fetch("https://opensky-network.org/api/states/all")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
 
-        function displayFlights(page) {
-            const flightsTable = document.getElementById('flightsTable');
-            flightsTable.innerHTML = '';
-    
-            const startIndex = (page - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const pageFlights = flights.slice(startIndex, endIndex);
-    
-            for (const flight of pageFlights) {
-                const row = document.createElement('tr');
-                row.addEventListener('click', function() {
-                    showFlightDetails(flight);
-                });
-    
-                const icao24 = document.createElement('td');
-                icao24.textContent = flight[0];
-                row.appendChild(icao24);
-    
-                const callsign = document.createElement('td');
-                callsign.textContent = flight[1];
-                row.appendChild(callsign);
-    
-                const originCountry = document.createElement('td');
-                originCountry.textContent = flight[2];
-                row.appendChild(originCountry);
-    
-                flightsTable.appendChild(row);
-            }
+      return response.json();
+    })
+    .then((data) => {
+      flights.push(...data.states);
+      displayFlights(currentPage);
+    })
+    .catch((error) => {
+      if (error.message === "404") {
+        showNoFlightPopup();
+      } else {
+        console.log("Error:", error);
+      }
+    });
 
-        updatePagination();
+  function displayFlights(page) {
+    const flightsTable = document.getElementById("flightsTable");
+    flightsTable.innerHTML = "";
+
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageFlights = flights.slice(startIndex, endIndex);
+
+    for (const flight of pageFlights) {
+      const row = document.createElement("tr");
+      row.addEventListener("click", function () {
+        showFlightDetails(flight);
+      });
+
+      const icao24 = document.createElement("td");
+      icao24.textContent = flight[0];
+      row.appendChild(icao24);
+
+      const callsign = document.createElement("td");
+      callsign.textContent = flight[1];
+      row.appendChild(callsign);
+
+      const originCountry = document.createElement("td");
+      originCountry.textContent = flight[2];
+      row.appendChild(originCountry);
+
+      flightsTable.appendChild(row);
     }
 
-    function updatePagination() {
-        const prevPageBtn = document.getElementById('prevPageBtn');
-        const nextPageBtn = document.getElementById('nextPageBtn');
-        const currentPageIndicator = document.getElementById('currentPage');
+    updatePagination();
+  }
 
-        const totalPages = Math.ceil(flights.length / itemsPerPage);
+  function updatePagination() {
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+    const currentPageIndicator = document.getElementById("currentPage");
 
-        prevPageBtn.disabled = currentPage === 1;
-        nextPageBtn.disabled = currentPage === totalPages;
+    const totalPages = Math.ceil(flights.length / getFlightsPerPage());
 
-        currentPageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
-    }
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
 
-        function showFlightDetails(flight) {
-            const popup = window.open('', '_blank', 'width=400,height=300');
-            popup.document.write(`
+    currentPageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+  }
+
+  function showFlightDetails(flight) {
+    const popup = window.open("", "_blank", "width=400,height=300");
+    popup.document.write(`
                 <html>
                 <head>
                     <title>Flight Details</title>
@@ -100,101 +92,129 @@ function getAllStates() {
                 </body>
                 </html>
             `);
-            popup.document.close();
+    popup.document.close();
 
-            const icao24 = flight[0];
+    const icao24 = flight[0];
 
-            fetch(`https://opensky-network.org/api/tracks/all?icao24=${icao24}&time=0`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.path && data.path.length > 0) {
-                        const track = data.path;
+    fetch(`https://opensky-network.org/api/tracks/all?icao24=${icao24}&time=0`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
 
-                        const lastPosition = track[track.length - 1];
-                        const latitude = lastPosition[1];
-                        const longitude = lastPosition[2];
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.path && data.path.length > 0) {
+          const track = data.path;
 
-                        showMarker(latitude, longitude);
-                
-                    }
-                });
-                
-    }
+          const lastPosition = track[track.length - 1];
+          const latitude = lastPosition[1];
+          const longitude = lastPosition[2];
 
-    document.getElementById('prevPageBtn').addEventListener('click', function() {
-        currentPage--;
-        displayFlights(currentPage);
-    });
+          showMarker(latitude, longitude);
+        }
+      })
+      .catch((error) => {
+        if (error.message === "404") {
+          showNoFlightToTrackPopup();
+        } else {
+          console.log("Error:", error);
+        }
+      });
+  }
 
-    document.getElementById('nextPageBtn').addEventListener('click', function() {
-        currentPage++;
-        displayFlights(currentPage);
-    });
+  document.getElementById("prevPageBtn").addEventListener("click", function () {
+    currentPage--;
+    displayFlights(currentPage);
+  });
+
+  document.getElementById("nextPageBtn").addEventListener("click", function () {
+    currentPage++;
+    displayFlights(currentPage);
+  });
 }
+
+function getFlightsPerPage() {
+  if (window.matchMedia("(max-width: 500px)").matches) {
+    return 4;
+  } else {
+    return 20;
+  }
+}
+
+function showNoFlightPopup() {
+  alert("The flight doesn't have tracks");
+}
+
+function showNoFlightToTrackPopup() {
+  alert("The flight doesn't have tracks");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  showMarker(0, 0);
+});
 
 function getFlightLifeTrack() {
-    fetch('https://opensky-network.org/api/tracks/all?icao24=a545d8&time=0')
-        .then(response => response.json())
-        .then(data => {
+  fetch("https://opensky-network.org/api/tracks/all?icao24=a545d8&time=0")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data && data.path && data.path.length > 0) {
+        const tracks = data.path;
 
-        if (data && data.path && data.path.length > 0) {
-            const tracks = data.path;
+        const tableBody = document.querySelector("#flight-table tbody");
 
-            const tableBody = document.querySelector('#flight-table tbody');
-  
-            tableBody.innerHTML = '';
-  
-            tracks.forEach(track => {
-            const time = new Date(track[0] * 1000).toLocaleString();
-            const latitude = track[1];
-            const longitude = track[2];
-            const baroAltitude = track[3];
-            const trueTrack = track[5];
-            const onGround = track[6];
+        tableBody.innerHTML = "";
 
-            const row = document.createElement('tr');
-            const timeCell = document.createElement('td');
-            timeCell.textContent = time;
-            row.appendChild(timeCell);
-  
-            const latitudeCell = document.createElement('td');
-            latitudeCell.textContent = latitude;
-            row.appendChild(latitudeCell);
-  
-            const longitudeCell = document.createElement('td');
-            longitudeCell.textContent = longitude;
-            row.appendChild(longitudeCell);
-  
-            const baroAltitudeCell = document.createElement('td');
-            baroAltitudeCell.textContent = baroAltitude;
-            row.appendChild(baroAltitudeCell);
-  
-            const trueTrackCell = document.createElement('td');
-            trueTrackCell.textContent = trueTrack;
-            row.appendChild(trueTrackCell);
-  
-            const onGroundCell = document.createElement('td');
-            onGroundCell.textContent = onGround;
-            row.appendChild(onGroundCell);
-  
-            tableBody.appendChild(row);
-            });
+        tracks.forEach((track) => {
+          const time = new Date(track[0] * 1000).toLocaleString();
+          const latitude = track[1];
+          const longitude = track[2];
+          const baroAltitude = track[3];
+          const trueTrack = track[5];
+          const onGround = track[6];
 
-            const lastTrack = tracks[tracks.length - 1];
-            const lastLatitude = lastTrack[1];
-            const lastLongitude = lastTrack[2];
-  
-            showMarker(lastLatitude, lastLongitude);
-        } 
-            else {
-          console.log('No track data available.');
-        }
+          const row = document.createElement("tr");
+          const timeCell = document.createElement("td");
+          timeCell.textContent = time;
+          row.appendChild(timeCell);
+
+          const latitudeCell = document.createElement("td");
+          latitudeCell.textContent = latitude;
+          row.appendChild(latitudeCell);
+
+          const longitudeCell = document.createElement("td");
+          longitudeCell.textContent = longitude;
+          row.appendChild(longitudeCell);
+
+          const baroAltitudeCell = document.createElement("td");
+          baroAltitudeCell.textContent = baroAltitude;
+          row.appendChild(baroAltitudeCell);
+
+          const trueTrackCell = document.createElement("td");
+          trueTrackCell.textContent = trueTrack;
+          row.appendChild(trueTrackCell);
+
+          const onGroundCell = document.createElement("td");
+          onGroundCell.textContent = onGround;
+          row.appendChild(onGroundCell);
+
+          tableBody.appendChild(row);
+        });
+
+        const lastTrack = tracks[tracks.length - 1];
+        const lastLatitude = lastTrack[1];
+        const lastLongitude = lastTrack[2];
+
+        showMarker(lastLatitude, lastLongitude);
+      } else {
+        console.log("No track data available.");
+      }
     })
-    .catch(error => {
-        console.log('Error:', error);
+    .catch((error) => {
+      console.log("Error:", error);
     });
 }
 
-export {getAllStates}
-export {getFlightLifeTrack}
-export {showMarker}
+export { getAllStates };
+export { getFlightLifeTrack };
