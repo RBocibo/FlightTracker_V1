@@ -22,7 +22,9 @@ cd FlightTracker_V1
   
 # 7. You will lend on the following screen for mobile and desktop
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/da5df6c5-196b-4251-b18e-b2afc1ffb234)
+The landing screen show the Equator as a default location on the map, and when you decide to get all the states and select a flight based on the results you have the location of the flight will be tracked and shown on the map.
+
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/04efd0a8-6bee-4f98-b0fb-47de566df39b)
 
 
 :sparkles: Mobile Version for FlightTracker :earth_africa: :round_pushpin:
