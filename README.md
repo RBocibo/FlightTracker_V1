@@ -20,7 +20,7 @@ cd FlightTracker_V1
  
  cd FlightTracker_V1/dist/index.html
   
-# 7. You will lend on the following screen for mobile and desktop
+# 7. You will land on the following screen for mobile and desktop
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/e9ae741a-6b8d-4027-befd-825f4cedb3c4)
 
