@@ -20,7 +20,7 @@ cd FlightTracker_V1
  
  cd FlightTracker_V1/dist/index.html
   
-# 7. You will lend on the following screen for mobile and desktop
+# 7. You will land on the following screen for mobile and desktop
 
 The landing screen shows the Equator as a default location on the map, and when you decide to get all the states and select a flight based on the results you have, the location of the flight will be tracked and shown on the map.
 
