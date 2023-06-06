@@ -1,8 +1,9 @@
-let marker;
-let map;
+import * as L from "leaflet";
+let marker: L.Marker | null = null;
+let map: L.Map |null = null;
 
-function showMarker(latitude, longitude) {
-  const mapContainer = document.querySelector("#map");
+function showMarker(latitude: number, longitude: number) {
+  const mapContainer: any = document.querySelector("#map") as HTMLElement;
 
   if (!map) {
     map = L.map(mapContainer, {
@@ -28,4 +29,4 @@ function showMarker(latitude, longitude) {
   marker.addTo(map);
 }
 
-export { showMarker };
+export {showMarker}
