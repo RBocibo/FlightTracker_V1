@@ -59,6 +59,10 @@ function getAllStates() {
       }
     }
 
+    if (typeof Storage !== "undefined") {
+      localStorage.setItem("flights", JSON.stringify(flights));
+    }
+
     updatePagination();
   }
 
