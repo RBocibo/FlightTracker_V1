@@ -60,11 +60,7 @@ function getAllStates() {
     }
 
     if (typeof Storage !== "undefined") {
-      const expireAfterDay = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
       localStorage.setItem("flights", JSON.stringify(flights));
-      document.cookie = `flights=${JSON.stringify(
-        flights
-      )}; expires=${expireAfterDay.toUTCString()}; path=/;`;
     }
 
     updatePagination();
