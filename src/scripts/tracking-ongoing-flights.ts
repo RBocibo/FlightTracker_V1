@@ -1,3 +1,4 @@
+import { fromEvent } from "rxjs";
 import { showMarker } from "./map";
 
 function getAllStates() {
@@ -146,19 +147,25 @@ function getAllStates() {
   }
 
   const previousButton = document.getElementById("prevPageBtn");
-  if (previousButton) {
-    previousButton.addEventListener("click", function () {
-      currentPage--;
-      displayFlights(currentPage);
+
+  if(previousButton) {
+    const previousButtonObservable$ = fromEvent(previousButton, "click");
+
+    previousButtonObservable$.subscribe(() => {
+        currentPage--;
+        displayFlights(currentPage);
     });
   }
 
   const nextButton = document.getElementById("nextPageBtn");
-  if (nextButton) {
-    nextButton.addEventListener("click", function () {
-      currentPage++;
-      displayFlights(currentPage);
-    });
+
+  if(nextButton) {
+    const nextButtonObservable$ = fromEvent(nextButton, "click");
+    
+    nextButtonObservable$.subscribe(() => {
+            currentPage++;
+            displayFlights(currentPage);
+        });
   }
 }
 
