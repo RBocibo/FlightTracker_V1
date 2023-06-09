@@ -1,3 +1,4 @@
+import { Observable, fromEvent } from "rxjs";
 import { showMarker } from "./map";
 
 function getAllStates() {
@@ -5,25 +6,26 @@ function getAllStates() {
   const flights: any = [];
   let currentPage: number = 1;
 
-  fetch("https://opensky-network.org/api/states/all")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(response.status.toString());
-      }
+  const fetchFlights$ = new Observable((observer: any) => {
+    fetch("https://opensky-network.org/api/states/all")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status.toString());
+        }
 
-      return response.json();
-    })
-    .then((data) => {
-      flights.push(...data.states);
-      displayFlights(currentPage);
-    })
-    .catch((error) => {
-      if (error.message === "404") {
+        return response.json();
+      })
+      .then((data) => {
+        observer.next(flights.push(...data.states));
+        observer.next(displayFlights(currentPage));
+        observer.complete();
+      })
+      .catch((error) => {
         showNoFlightPopup();
-      } else {
-        console.log("Error:", error);
-      }
-    });
+        observer.error(error);
+      });
+  });
+  fetchFlights$.subscribe();
 
   function displayFlights(page: number) {
     const flightsTable: HTMLElement | null =
@@ -137,7 +139,7 @@ function getAllStates() {
         }
       })
       .catch((error) => {
-        if (error.message === "404") {
+        if (error.message === "404" || error.message === "500") {
           showNoFlightToTrackPopup();
         } else {
           console.log("Error:", error);
@@ -146,16 +148,22 @@ function getAllStates() {
   }
 
   const previousButton = document.getElementById("prevPageBtn");
+
   if (previousButton) {
-    previousButton.addEventListener("click", function () {
+    const previousButtonObservable$ = fromEvent(previousButton, "click");
+
+    previousButtonObservable$.subscribe(() => {
       currentPage--;
       displayFlights(currentPage);
     });
   }
 
   const nextButton = document.getElementById("nextPageBtn");
+
   if (nextButton) {
-    nextButton.addEventListener("click", function () {
+    const nextButtonObservable$ = fromEvent(nextButton, "click");
+
+    nextButtonObservable$.subscribe(() => {
       currentPage++;
       displayFlights(currentPage);
     });
@@ -178,8 +186,11 @@ function showNoFlightToTrackPopup() {
   alert("The flight doesn't have tracks");
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  showMarker(0, 0);
+const domDocumentLoaded$ = new Observable((observer) => {
+  window.addEventListener("DOMContentLoaded", () => {
+    observer.next(showMarker(0, 0));
+  });
 });
+domDocumentLoaded$.subscribe();
 
 export { getAllStates };
