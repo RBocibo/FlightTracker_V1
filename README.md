@@ -1,7 +1,7 @@
 # FlightTracker_V1 
 
 ⚡ **HOW TO RUN THE PROJECT ? **👷
-# 1.  Clone the project using the folowing link
+# 1.  Clone project repository using the folowing link
 
 https://github.com/RBocibo/FlightTracker_V1.git
  
@@ -22,18 +22,21 @@ cd FlightTracker_V1
   
 # 7. You will land on the following screen for mobile and desktop
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/e9ae741a-6b8d-4027-befd-825f4cedb3c4)
+The landing screen shows the Equator as a default location on the map, and when you decide to get all the states and select a flight based on the results you have, the location of the flight will be tracked and shown on the map.
+
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/04efd0a8-6bee-4f98-b0fb-47de566df39b)
 
 
 :sparkles: Mobile Version for FlightTracker :earth_africa: :round_pushpin:
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/d04abf9e-8de7-4eef-a266-2bd3a2d82028)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/cbfcc9cb-6c92-4176-9ccb-66f681a8c356)
 
 :radio_button: Mobile versions show only 3 flights states on the page and use pagination to get more
 
 
-:sparkles: Desktop version of screens higher than mobile :earth_africa: :round_pushpin:
+:sparkles: Desktop version or screens bigger than mobile :earth_africa: :round_pushpin:
 
-![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/9625fe20-9393-4fd8-9fae-3fe44de37825)
+![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/7b2fa02e-f7d9-43f5-8906-5e450f36cd06)
+
 
 :radio_button: Desktop version how about 10 states on the page and use pagination to get more.
