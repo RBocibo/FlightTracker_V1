@@ -29,11 +29,11 @@ cd FlightTracker_V1
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/d04abf9e-8de7-4eef-a266-2bd3a2d82028)
 
-:radio_button: Mobile versions show only four flights states on the page and use pagination to get more
+:radio_button: Mobile versions show only 3 flights states on the page and use pagination to get more
 
 
 :sparkles: Desktop version of screens higher than mobile :earth_africa: :round_pushpin:
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/9625fe20-9393-4fd8-9fae-3fe44de37825)
 
-:radio_button: Desktop version how about 20 states on the page and use pagination to get more.
+:radio_button: Desktop version how about 10 states on the page and use pagination to get more.
