@@ -16,7 +16,7 @@ function getAllStates() {
         return response.json();
       })
       .then((data) => {
-        observer.next(flights.push(...data.states));
+        observer.next(flights.push(...data.states.slice(0,50)));
         observer.next(displayFlights(currentPage));
         observer.complete();
       })
@@ -172,9 +172,9 @@ function getAllStates() {
 
 function getFlightsPerPage() {
   if (window.matchMedia("(max-width: 500px)").matches) {
-    return 4;
+    return 3;
   } else {
-    return 20;
+    return 10;
   }
 }
 
