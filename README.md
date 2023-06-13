@@ -31,11 +31,12 @@ The landing screen shows the Equator as a default location on the map, and when 
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/cbfcc9cb-6c92-4176-9ccb-66f681a8c356)
 
-:radio_button: Mobile versions show only four flights states on the page and use pagination to get more
+:radio_button: Mobile versions show only 3 flights states on the page and use pagination to get more
 
 
 :sparkles: Desktop version or screens bigger than mobile :earth_africa: :round_pushpin:
 
 ![image](https://github.com/RBocibo/FlightTracker_V1/assets/99795114/7b2fa02e-f7d9-43f5-8906-5e450f36cd06)
 
-:radio_button: Desktop version show about 20 states on the page and use pagination to get more.
+
+:radio_button: Desktop version how about 10 states on the page and use pagination to get more.
